@@ -19,5 +19,8 @@
   "homepage": "https://github.com/FSGeoff/note-taker#readme",
   "dependencies": {
     "expres": "0.0.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }
