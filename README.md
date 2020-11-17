@@ -22,6 +22,7 @@ The following node.js packages were installed in the application.
 2. express
 3. path
 4. nodemon
+5. uuid
 
 ---
 ## Routes

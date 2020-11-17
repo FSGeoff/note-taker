@@ -1,18 +1,70 @@
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
+const util = require("util");
+const { v4: uuidv4 } = require("uuid");
 const app = express();
 
 PORT = process.env.PORT || 8080;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
+
+const readFileAsync = util.promisify(fs.readFile);
+const writeFileAsync = util.promisify(fs.writeFile);
 
 const notes = [
 	{
 		test: "Success",
 	},
 ];
+
+// API Routes
+
+// * GETs `/api/notes`, reads the  `db.json`
+// file and returns all saved notes as JSON.
+app.get("/api/notes", (req, res) => {
+	readFileAsync("./db/db.json", "utf8")
+		.then((data) => {
+			console.log(data);
+			return res.json(JSON.parse(data));
+		})
+		.catch((err) => {
+			throw err;
+		});
+});
+
+// POSTs `/api/notes` and receives a new note to save
+// on the request body, adds it to the `db.json` file,
+// and then return the new note to the client.
+app.post("/api/notes", (req, res) => {
+	let newMessage = req.body;
+	// TODO: Read the file. 
+	// parse the JSON which should be an array
+	// push your new note object into the array
+	// save the JSON array to the file. 
+	const newNote = { id: uuidv4(), ...newMessage };
+	writeFileAsync("./db/db.json", JSON.stringify(newNote))
+		.then(() => {
+			return res.json({ success: true });
+		})
+		.catch((err) => {
+			throw err;
+		});
+});
+// Receives a query parameter containing the id of a note to delete
+app.delete("/api/notes/:id", (req, res) => {
+	const iD = req.params.id;
+	const filteredNotes = newNote.filter((id) => newNote.id !== iD);
+	fs.writeFileAsync("./db/db.json", filteredNotes)
+		.then((data) => {
+			return res.json(data);
+		})
+		.catch((err) => {
+			throw err;
+		});
+});
 
 // HTML Routes
 
@@ -24,44 +76,6 @@ app.get("/notes", (req, res) => {
 //Returns the index.html files
 app.get("*", (req, res) => {
 	res.sendFile(path.join(__dirname, "/public/index.html"));
-});
-
-// API Routes
-
-// * GETs `/api/notes`, reads the  `db.json`
-// file and returns all saved notes as JSON.
-app.get("/api/notes", (req, res) => {
-	fs.readFile("./db/db.json", JSON.stringify(notes), (err) => {
-		if (err) {
-			throw err;
-		} else {
-			return res.json(notes);
-		}
-	});
-});
-
-// POSTs `/api/notes` and receives a new note to save
-// on the request body, adds it to the `db.json` file,
-// and then return the new note to the client.
-app.post("/api/notes", (req, res) => {
-	let newMessage = req.body;
-	res.json(notes);
-	fs.writeFile("./db/db.json", JSON.stringify(newMessage), (err) => {
-		if (err) {
-			throw err;
-		} else {
-			return res.json(newMessage);
-		}
-	});
-	notes.push(newMessage);
-});
-// Receives a query parameter containing the id of a note to delete
-app.delete("/api/notes", (req, res) => {
-	fs.readFile("./db/db.json", JSON.stringify(notes), (err) => {
-		if(err) {
-			throw err;
-		}else {}
-	});
 });
 
 app.listen(PORT, () => {
