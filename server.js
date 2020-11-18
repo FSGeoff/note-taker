@@ -40,14 +40,17 @@ app.get("/api/notes", (req, res) => {
 // and then return the new note to the client.
 app.post("/api/notes", (req, res) => {
 	let newMessage = req.body;
-	// TODO: Read the file. 
+	// TODO: Read the file.
 	// parse the JSON which should be an array
 	// push your new note object into the array
-	// save the JSON array to the file. 
+	// save the JSON array to the file.
 	const newNote = { id: uuidv4(), ...newMessage };
 	writeFileAsync("./db/db.json", JSON.stringify(newNote))
-		.then(() => {
-			return res.json({ success: true });
+		.then((data) => {
+			const value = Object.values(newMessage);
+			console.log(value);
+
+			return res.json(JSON.stringify(value));
 		})
 		.catch((err) => {
 			throw err;

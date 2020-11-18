@@ -1,10 +1,11 @@
 # Note Taker
 
+
 [![License: Artistic-2.0](https://img.shields.io/badge/License-Artistic%202.0-0298c3.svg)](https://opensource.org/licenses/Artistic-2.0)
 
 ## Table of Contents
 [Description](#desription)<br/>
-[Dependencies](#dependencies)<br/>
+[Node Dependencies](#node-dependencies)<br/>
 [Routes](#routes)<br/>
 [Screenshots](#screenshots)<br/>
 [Questions](#questions)<br/>
@@ -16,13 +17,14 @@
 This application can be used to write, save, and delete notes. This application will use an express backend,and will save and retrieve note data from a JSON file.
 
 ---
-## Dependencies
+## Node Dependencies
 The following node.js packages were installed in the application.
-1. package.json to keep track of dependencies
-2. express
-3. path
-4. nodemon
-5. uuid
+1. **package.json** to keep track of dependencies
+2. **express** to use express.js server
+3. **path** to read/write files 
+4. **nodemon** for testing
+5. **uuid** to add unique ID to notes
+
 
 ---
 ## Routes
@@ -38,8 +40,8 @@ The following node.js packages were installed in the application.
 ---
 ## Screenshots
 
----
 
+---
 ## Questions
 Please feel free to contact me with any questions.<br/>
 Geoff Nix<br/>
