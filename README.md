@@ -40,8 +40,8 @@ The following node.js packages were installed in the application.
 
 ---
 ## Screenshots
-![](./screenshots/screenshot1.png);
-![](./screenshots/screenshot2.png);
+![](./screenshots/screenshot1.png)
+![](./screenshots/screenshot2.png)
 
 ---
 
