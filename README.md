@@ -35,7 +35,7 @@ The following node.js packages were installed in the application.
 * API Routes
     *   GET `/api/notes` reads the `db.json` file and returns all saved notes as JSON
     * POST `/api/notes` receives a new note to save on the request body, adds it to the `db.json` file, and then returns the new note to the client.
-    * DELETE `/api/notes/:id` receives a query parameter containing the id of a note to delete. It will read all notes from the `db.json` file, remove the note with the given `id` property, and then rewrite the notes to the `db.json` file.
+    * DELETE `/api/notes/:id` receives a query parameter containing the id of a note to delete. It will read all notes from the `db.json` file, remove the note with the given `id` property, and then rewrite the remaining notes to the `db.json` file.
 
 
 ---
