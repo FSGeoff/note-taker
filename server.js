@@ -41,8 +41,6 @@ app.get("/api/notes", (req, res) => {
 app.post("/api/notes", (req, res) => {
 	readFileAsync("./db/db.json", "utf8")
 		.then((data) => {
-			console.log("Hello World", data);
-
 			const notesArray = JSON.parse(data);
 			let newMessage = req.body;
 			// TODO: Read the file.
@@ -68,15 +66,22 @@ app.post("/api/notes", (req, res) => {
 });
 // Receives a query parameter containing the id of a note to delete
 app.delete("/api/notes/:id", (req, res) => {
-	const iD = req.params.id;
-	const filteredNotes = newNote.filter((id) => newNote.id !== iD);
-	fs.writeFileAsync("./db/db.json", filteredNotes)
-		.then((data) => {
-			return res.json(data);
-		})
-		.catch((err) => {
-			throw err;
-		});
+	let newMessage = req.body;
+	readFileAsync("./db/db.json", "utf8").then((data) => {
+		const db = JSON.parse(data);
+		console.log("DB", db);
+		const filteredNotes = db.filter((notes) => notes.id !== req.params.id);
+		const finalNote = filteredNotes;
+		console.log("74", finalNote);
+		writeFileAsync("./db/db.json", JSON.stringify(finalNote))
+			.then((data) => {
+				console.log(data);
+				return res.json(finalNote);
+			})
+			.catch((err) => {
+				throw err;
+			});
+	});
 });
 
 // HTML Routes
