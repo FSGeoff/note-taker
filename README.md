@@ -8,6 +8,7 @@
 [Node Dependencies](#node-dependencies)<br/>
 [Routes](#routes)<br/>
 [Screenshots](#screenshots)<br/>
+[Links](#links)<br/>
 [Questions](#questions)<br/>
 
 
@@ -42,8 +43,12 @@ The following node.js packages were installed in the application.
 ![](./screenshots/screenshot1.png);
 ![](./screenshots/screenshot2.png);
 
-[Demo](https://drive.google.com/file/d/1z5Y9EPyfVYyNAQuWpl5vW1k0sFWMVUgd/view)
 ---
+
+## Links 
+* Demo of the [app](https://drive.google.com/file/d/1z5Y9EPyfVYyNAQuWpl5vW1k0sFWMVUgd/view)<br/>
+* Github [repo](https://github.com/FSGeoff/note-taker.git)
+
 ## Questions
 Please feel free to contact me with any questions.<br/>
 Geoff Nix<br/>
