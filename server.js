@@ -27,7 +27,7 @@ const notes = [
 app.get("/api/notes", (req, res) => {
 	readFileAsync("./db/db.json", "utf8")
 		.then((data) => {
-			console.log(data);
+			console.log("Hello World", data);
 			return res.json(JSON.parse(data));
 		})
 		.catch((err) => {
@@ -39,18 +39,28 @@ app.get("/api/notes", (req, res) => {
 // on the request body, adds it to the `db.json` file,
 // and then return the new note to the client.
 app.post("/api/notes", (req, res) => {
-	let newMessage = req.body;
-	// TODO: Read the file.
-	// parse the JSON which should be an array
-	// push your new note object into the array
-	// save the JSON array to the file.
-	const newNote = { id: uuidv4(), ...newMessage };
-	writeFileAsync("./db/db.json", JSON.stringify(newNote))
+	readFileAsync("./db/db.json", "utf8")
 		.then((data) => {
-			const value = Object.values(newMessage);
-			console.log(value);
+			console.log("Hello World", data);
 
-			return res.json(JSON.stringify(value));
+			const notesArray = JSON.parse(data);
+			let newMessage = req.body;
+			// TODO: Read the file.
+			// parse the JSON which should be an array
+			// push your new note object into the array
+			// save the JSON array to the file.
+			const newNote = { id: uuidv4(), ...newMessage };
+			notesArray.push(newNote);
+			writeFileAsync("./db/db.json", JSON.stringify(notesArray))
+				.then((data) => {
+					const valuesArray = Object.values(newNote);
+					console.log(valuesArray);
+
+					return res.json(newNote);
+				})
+				.catch((err) => {
+					throw err;
+				});
 		})
 		.catch((err) => {
 			throw err;
